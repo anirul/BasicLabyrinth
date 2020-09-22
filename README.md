@@ -1,0 +1,2 @@
+# BasicLabyrinth
+Basic Labyrinth structure.
