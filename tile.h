@@ -12,12 +12,13 @@ enum class TileType : char
 
 enum class CommandType
 {
-	EXIT,
+	QUIT,
 	NORTH,
 	SOUTH,
 	EAST,
 	WEST,
 	ATTACK,
+	HELP,
 };
 
 TileType get_tile_at_position(int x, int y);
@@ -34,6 +35,8 @@ Enemy get_enemy(int x, int y);
 
 struct Player 
 {
+	int x;
+	int y;
 	int health_points;
 	int attack;
 	int defence;

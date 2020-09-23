@@ -1,5 +1,6 @@
 #include <map>
-#include "room.h"
+#include <cassert>
+#include "tile.h"
 
 // An anonymous namespace just here so you cannot access there from somewhere
 // else.
@@ -17,10 +18,17 @@ std::string local_world =
 	"########################";
 
 // Local player stuff.
-Player local_player{ 200, 20, 5, "Anonymous", 0 };
+Player local_player{ 1, 22, 200, 20, 5, "Anonymous", 0 };
 
 // Map that map space to enemies.
 std::map<std::pair<int, int>, Enemy> local_enemy;
+
+int xy_local(int x, int y)
+{
+	assert(x >= 0 && x < 24);
+	assert(y >= 0 && y < 8);
+	return x + y * 24;
+}
 
 } // End of namespace.
 
@@ -43,7 +51,11 @@ Enemy get_enemy(int x, int y)
 
 void set_player(Player player)
 {
+	// Erase the local player.
+	local_world[xy_local(local_player.x, local_player.y)] = '.';
 	local_player = player;
+	// Reinclude the new player.
+	local_world[xy_local(player.x, player.y)] = 'P';
 }
 
 Player get_player()
