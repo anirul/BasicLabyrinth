@@ -25,23 +25,28 @@ TileType get_tile_at_position(int x, int y);
 
 struct Enemy 
 {
-	int health_points;
-	int attack;
-	int defence;
-	std::string name;
+	int x;
+	int y;
+	int health_points = 50;
+	int attack = 10;
+	int defence = 2;
+	std::string name = "Gob";
 };
 
+void set_enemy(Enemy enemy, int x, int y);
 Enemy get_enemy(int x, int y);
 
 struct Player 
 {
-	int x;
-	int y;
-	int health_points;
-	int attack;
-	int defence;
-	std::string name;
-	int experience;
+	int x = 22;
+	int y = 1;
+	int health_points = 100;
+	int max_health_points = 100;
+	int attack = 20;
+	int defence = 5;
+	std::string name = "The Hero";
+	int experience = 0;
+	int health_regen = 5;
 };
 
 void set_player(Player player);

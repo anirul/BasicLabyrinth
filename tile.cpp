@@ -6,42 +6,59 @@
 // else.
 namespace {
 
-// Map of the local space.
-std::string local_world = 
-	"########################" // 24 * 8
-	"#.....E......E.....#..P#"
-	"#######..#####..####...#"
-	"#........#.............#"
-	"#.E......#...E...E.....#"
-	"#..##################..#"
-	"#.........E............#"
-	"########################";
+	// Map of the local space.
+	std::string local_world = 
+		"########################" // 24 * 8
+		"#.....E......E.....#..P#" // P is at (22, 1)
+		"#######..#####..####...#"
+		"#........#.............#"
+		"#.E......#...E...E.....#"
+		"#..##################..#"
+		"#.........E............#"
+		"########################";
 
-// Local player stuff.
-Player local_player{ 1, 22, 200, 20, 5, "Anonymous", 0 };
+	// Local player stuff.
+	Player local_player{};
 
-// Map that map space to enemies.
-std::map<std::pair<int, int>, Enemy> local_enemy;
+	// Map that map space to enemies.
+	std::map<std::pair<int, int>, Enemy> local_enemy;
 
-int xy_local(int x, int y)
-{
-	assert(x >= 0 && x < 24);
-	assert(y >= 0 && y < 8);
-	return x + y * 24;
-}
+	int xy_local(int x, int y)
+	{
+		// We want the local array to be bound to the borders.
+		if (x < 0) x = 0;
+		if (x > 23) x = 23;
+		if (y < 0) y = 0;
+		if (y > 7) y = 7;
+		// Return the position within the local world of the cursor.
+		// As the array is singular dimention we use the largest value to
+		// split it.
+		return x + y * 24;
+	}
 
 } // End of namespace.
 
 TileType get_tile_at_position(int x, int y)
 {
-	// Get the tile at the location x, y.
+	// TODO Get the tile at the location x, y in the world.
 	return TileType::BLOCK;
+}
+
+void set_enemy(Enemy enemy, int x, int y)
+{
+	// Set the location of the enemy.
+	enemy.x = x;
+	enemy.y = y;
+	local_enemy[{x, y}] = enemy;
 }
 
 Enemy get_enemy(int x, int y)
 {
 	Enemy enemy;
-	// Get the local position (if it exist).
+	enemy.x = x;
+	enemy.y = y;
+	// TODO complete me!
+	// Get the local position in the world (if it exist).
 	// If an enemy is at the position.
 	// Then check if there is an enemy at this position?
 	// if not then create it and store it at the location.
