@@ -10,13 +10,14 @@ void show_help()
 	std::cout << "\t[s]outh  -> move south.\n";
 	std::cout << "\t[w]est   -> move west.\n";
 	std::cout << "\t[e]ast   -> move east.\n";
-	std::cout << "\t[a]ttack -> attack enemies.\n";
+	std::cout << "\t[a]ttack -> attack enemies.\n\n";
 }
 
 void show_state() 
 {
 	Player player = get_player();
-	std::cout << "Maze :\n\n";
+	// Show the maze to the user.
+	std::cout << "Maze :\n";
 	for (int i = -1; i < 2; ++i)
 	{
 		std::cout << "\t +---+---+---+\n\t";
@@ -29,8 +30,30 @@ void show_state()
 		std::cout << " |\n";
 	}
 	std::cout << "\t +---+---+---+\n\n";
+	// Show the player info the user.
 	std::cout << "Player(" << player.x << ", " << player.y << ") :\n";
-	std::cout << "\thit_points: \t" << player.health_points << "\n";
+	std::cout << "\tname       : " << player.name << "\n";
+	std::cout << "\thit points : " << player.health_points << "\n";
+	std::cout << "\n";
+	// Show the enemy that are within view of the user.
+	for (int i = -1; i < 2; ++i)
+	{
+		for (int j = -1; j < 2; ++j)
+		{
+			if (TileType::ENEMY == 
+				get_tile_at_position(player.x + i, player.y + j))
+			{
+				Enemy enemy = get_enemy(player.x + i, player.y + j);
+				std::cout 
+					<< "Enemy(" << player.x + i 
+					<< ", " << player.y + j 
+					<< ")\n";
+				std::cout << "\tname       : " << enemy.name << "\n";
+				std::cout << "\thit points : " << enemy.health_points << "\n";
+				std::cout << "\n";
+			}
+		}
+	}
 }
 
 CommandType get_command() 
@@ -61,7 +84,7 @@ CommandType get_command()
 
 int main()
 {
-	std::cout << "Welcome in the Maze!\n";
+	std::cout << "Welcome in the Maze!\n\n";
 	show_help();
 	while (true)
 	{
@@ -74,29 +97,24 @@ int main()
 				return 0;
 			case CommandType::NORTH:
 				north();
-				tick();
 				break;
 			case CommandType::SOUTH:
 				south();
-				tick();
 				break;
 			case CommandType::EAST:
 				east();
-				tick();
 				break;
 			case CommandType::WEST:
 				west();
-				tick();
 				break;
 			case CommandType::ATTACK:
 				attack();
-				tick();
 				break;
 			case CommandType::HELP:
 			default:
-				tick();
 				break;
 		}
+		tick();
 	}
 	return 0;
 }
