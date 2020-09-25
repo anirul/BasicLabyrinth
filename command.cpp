@@ -22,23 +22,44 @@ void north()
 	// If the location is not empty do NOTHING!
 	if (tile_type != TileType::EMPTY)
 		return;
-	player.x += 1;
+	player.y -= 1;
 	set_player(player);
 }
 
 void south()
 {
-	// TODO complete me!
+	Player player = get_player();
+	// Get the location at north of the current player.
+	TileType tile_type = get_tile_at_position(player.x, player.y + 1);
+	// If the location is not empty do NOTHING!
+	if (tile_type != TileType::EMPTY)
+		return;
+	player.y += 1;
+	set_player(player);
 }
 
 void east()
 {
-	// TODO complete me!
+	Player player = get_player();
+	// Get the location at north of the current player.
+	TileType tile_type = get_tile_at_position(player.x + 1, player.y);
+	// If the location is not empty do NOTHING!
+	if (tile_type != TileType::EMPTY)
+		return;
+	player.x += 1;
+	set_player(player);
 }
 
 void west()
 {
-	// TODO complete me!
+	Player player = get_player();
+	// Get the location at north of the current player.
+	TileType tile_type = get_tile_at_position(player.x - 1, player.y);
+	// If the location is not empty do NOTHING!
+	if (tile_type != TileType::EMPTY)
+		return;
+	player.x -= 1;
+	set_player(player);
 }
 
 void attack()

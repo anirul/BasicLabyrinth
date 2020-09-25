@@ -40,8 +40,8 @@ namespace {
 
 TileType get_tile_at_position(int x, int y)
 {
-	// TODO Get the tile at the location x, y in the world.
-	return TileType::BLOCK;
+	// Get the tile at the location x, y in the world.
+	return (TileType)local_world[xy_local(x, y)];
 }
 
 void set_enemy(Enemy enemy, int x, int y)
@@ -54,14 +54,10 @@ void set_enemy(Enemy enemy, int x, int y)
 
 Enemy get_enemy(int x, int y)
 {
-	Enemy enemy;
+	Enemy enemy = local_enemy[{x, y}];
+	// set the local position.
 	enemy.x = x;
 	enemy.y = y;
-	// TODO complete me!
-	// Get the local position in the world (if it exist).
-	// If an enemy is at the position.
-	// Then check if there is an enemy at this position?
-	// if not then create it and store it at the location.
 	// return the enemy at the position.
 	return enemy;
 }

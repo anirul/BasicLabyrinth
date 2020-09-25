@@ -5,23 +5,32 @@
 void show_help() 
 {
 	std::cout << "Valid options:\n";
-	std::cout << "\t[q]uit  -> quit the game.\n";
-	std::cout << "\t[n]orth -> move north.\n";
-	// TODO fill up the rest!
-	// See the list of command in the tile.h.
+	std::cout << "\t[q]uit   -> quit the game.\n";
+	std::cout << "\t[n]orth  -> move north.\n";
+	std::cout << "\t[s]outh  -> move south.\n";
+	std::cout << "\t[w]est   -> move west.\n";
+	std::cout << "\t[e]ast   -> move east.\n";
+	std::cout << "\t[a]ttack -> attack enemies.\n";
 }
 
 void show_state() 
 {
 	Player player = get_player();
-	std::cout << "Maze :\n";
-	// TODO complete me!
-	// You can either show the whole maze or just a portion of it.
+	std::cout << "Maze :\n\n";
+	for (int i = -1; i < 2; ++i)
+	{
+		std::cout << "\t +---+---+---+\n\t";
+		for (int j = -1; j < 2; ++j)
+		{
+			std::cout
+				<< " | "
+				<< (char)get_tile_at_position(player.x + j, player.y + i);
+		}
+		std::cout << " |\n";
+	}
+	std::cout << "\t +---+---+---+\n\n";
 	std::cout << "Player(" << player.x << ", " << player.y << ") :\n";
-	// TODO complete me!
-	// Now check if there is an enemy within range.
-	// for each enemy within range:
-	// show enemy description.
+	std::cout << "\thit_points: \t" << player.health_points << "\n";
 }
 
 CommandType get_command() 
