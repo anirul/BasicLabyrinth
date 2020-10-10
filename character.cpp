@@ -11,7 +11,8 @@ Character::Character(
 		xy_(xy),
 		health_points_(health_points),
 		attack_(attack),
-		defence_(defence) {}
+		defence_(defence),
+		name_(name) {}
 
 void Character::SetPosition(std::pair<int, int> xy)
 {
@@ -24,7 +25,9 @@ void Character::Attack(Character& enemy) const
 	float dist = Distance(enemy);
 	if (std::abs(dist - 1.0f) < epsilon)
 	{
-		enemy.SetHealthPoints(std::max(0, attack_ - enemy.GetDefence()));
+		enemy.SetHealthPoints(
+			enemy.GetHealthPoints() - 
+			std::max(0, attack_ - enemy.GetDefence()));
 	}
 }
 

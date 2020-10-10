@@ -25,6 +25,7 @@ public:
 		int length = 24);
 	void Regen();
 	void EraseDead();
+	bool HasEnemies() const;
 	std::pair<int, int> North(const Character& character) const;
 	std::pair<int, int> South(const Character& character) const;
 	std::pair<int, int> East(const Character& character) const;

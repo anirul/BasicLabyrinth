@@ -31,11 +31,24 @@ bool Command::ProcessCommand()
 	case 'h':
 	default:
 		ShowCommands();
+		break;
 	}
 	// Finish the process command.
 	world_.Regen();
 	world_.EraseDead();
 	world_.EnemyAttack();
+	// Check victory condition.
+	if (!world_.HasEnemies())
+	{
+		std::cout << "You WON!\n";
+		return false;
+	}
+	// Check death.
+	if (world_.GetHero().IsDead())
+	{
+		std::cout << "You are DEAD!\n";
+		return false;
+	}
 	return true;
 }
 

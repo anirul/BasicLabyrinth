@@ -48,6 +48,11 @@ void World::EraseDead()
 	enemies_ = { enemies_.begin(), pos };
 }
 
+bool World::HasEnemies() const
+{
+	return (bool)enemies_.size();
+}
+
 std::pair<int, int> World::North(const Character& character) const
 {
 	// Create a new position for the character.
