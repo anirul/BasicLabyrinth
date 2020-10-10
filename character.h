@@ -11,8 +11,9 @@ public:
 		int defence, 
 		const std::string& name);
 	void SetPosition(std::pair<int, int> xy);
+	void Attack(Character& enemy) const;
 	bool IsDead() const;
-	float Distance(const Character& character);
+	float Distance(const Character& character) const;
 
 public:
 	void SetHealthPoints(int health_points) { health_points_ = health_points; }
@@ -20,6 +21,7 @@ public:
 	int GetAttack() const { return attack_; }
 	int GetDefence() const { return defence_; }
 	std::pair<int, int> GetPosition() const { return xy_; }
+	const std::string& GetName() const { return name_; }
 
 protected:
 	std::pair<int, int> xy_;

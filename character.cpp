@@ -18,12 +18,22 @@ void Character::SetPosition(std::pair<int, int> xy)
 	xy_ = xy;
 }
 
+void Character::Attack(Character& enemy) const
+{
+	const float epsilon = 1e-4f;
+	float dist = Distance(enemy);
+	if (std::abs(dist - 1.0f) < epsilon)
+	{
+		enemy.SetHealthPoints(std::max(0, attack_ - enemy.GetDefence()));
+	}
+}
+
 bool Character::IsDead() const
 {
 	return health_points_ <= 0;
 }
 
-float Character::Distance(const Character& character)
+float Character::Distance(const Character& character) const
 {
 	float a2 = std::pow((float)(xy_.first - character.xy_.first), 2.0f);
 	float b2 = std::pow((float)(xy_.second - character.xy_.second), 2.0f);

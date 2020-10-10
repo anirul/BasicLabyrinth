@@ -3,10 +3,40 @@
 #include <iostream>
 #include <vector>
 
-void Command::ProcessCommand()
+bool Command::ProcessCommand()
 {
+	// Get the command from the keyboard.
+	std::cout << "] ";
+	std::string command_str;
+	std::getline(std::cin, command_str);
+	switch (command_str[0])
+	{
+	case 'q':
+		return false;
+	case 'n':
+		world_.GetHero().SetPosition(world_.North(world_.GetHero()));
+		break;
+	case 's':
+		world_.GetHero().SetPosition(world_.South(world_.GetHero()));
+		break;
+	case 'e':
+		world_.GetHero().SetPosition(world_.East(world_.GetHero()));
+		break;
+	case 'w':
+		world_.GetHero().SetPosition(world_.West(world_.GetHero()));
+		break;
+	case 'a':
+		world_.HeroAttack();
+		break;
+	case 'h':
+	default:
+		ShowCommands();
+	}
+	// Finish the process command.
 	world_.Regen();
 	world_.EraseDead();
+	world_.EnemyAttack();
+	return true;
 }
 
 void Command::ShowCommands()
@@ -18,4 +48,11 @@ void Command::ShowCommands()
 	std::cout << "\t[w]est   -> move west.\n";
 	std::cout << "\t[e]ast   -> move east.\n";
 	std::cout << "\t[a]ttack -> attack enemies.\n\n";
+}
+
+void Command::ShowState()
+{
+	world_.ShowMap();
+	world_.ShowHero();
+	world_.ShowEnemies();
 }

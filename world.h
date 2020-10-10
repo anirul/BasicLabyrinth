@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <utility>
 #include <vector>
@@ -21,22 +22,30 @@ public:
 			"#..##################..#"
 			"#.........E............#"
 			"########################", 
-		int length = 8);
+		int length = 24);
 	void Regen();
 	void EraseDead();
-	std::pair<int, int> North(const Character& character);
-	std::pair<int, int> South(const Character& character);
-	std::pair<int, int> East(const Character& character);
-	std::pair<int, int> West(const Character& character);
-	void Attack();
+	std::pair<int, int> North(const Character& character) const;
+	std::pair<int, int> South(const Character& character) const;
+	std::pair<int, int> East(const Character& character) const;
+	std::pair<int, int> West(const Character& character) const;
+	void ShowMap() const;
+	void ShowHero() const;
+	void ShowEnemies() const;
+	void HeroAttack();
+	void EnemyAttack();
+
+public:
+	Hero& GetHero() { return hero_; }
 
 private:
 	std::pair<int, int> CheckPosition(
 		std::pair<int, int> begin, 
-		std::pair<int, int> end);
+		std::pair<int, int> end) const;
+	char GetTile(std::pair<int, int> xy) const;
 
 private:
 	Hero hero_;
 	std::vector<Enemy> enemies_;
-	std::vector<std::vector<char>> map_;
+	std::map<std::pair<int, int>, char> map_;
 };
