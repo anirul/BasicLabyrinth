@@ -1,0 +1,30 @@
+#pragma once
+
+#include <string>
+
+class Character {
+public:
+	Character(
+		std::pair<int, int> xy, 
+		int health_points, 
+		int attack, 
+		int defence, 
+		const std::string& name);
+	void SetPosition(std::pair<int, int> xy);
+	bool IsDead() const;
+	float Distance(const Character& character);
+
+public:
+	void SetHealthPoints(int health_points) { health_points_ = health_points; }
+	int GetHealthPoints() const { return health_points_; }
+	int GetAttack() const { return attack_; }
+	int GetDefence() const { return defence_; }
+	std::pair<int, int> GetPosition() const { return xy_; }
+
+protected:
+	std::pair<int, int> xy_;
+	int health_points_;
+	int attack_;
+	int defence_;
+	std::string name_;
+};

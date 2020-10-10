@@ -1,12 +1,14 @@
 #pragma once
 
+#include "world.h"
 #include "tile.h"
 
-void north();
-void south();
-void east();
-void west();
-
-void attack();
-
-void tick();
+class Command {
+public:
+	Command(World& world) : world_(world) {}
+	void ProcessCommand();
+	void ShowCommands();
+	
+private:
+	World& world_;
+};

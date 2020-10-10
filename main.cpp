@@ -2,17 +2,6 @@
 #include "tile.h"
 #include "command.h"
 
-void show_help() 
-{
-	std::cout << "Valid options:\n";
-	std::cout << "\t[q]uit   -> quit the game.\n";
-	std::cout << "\t[n]orth  -> move north.\n";
-	std::cout << "\t[s]outh  -> move south.\n";
-	std::cout << "\t[w]est   -> move west.\n";
-	std::cout << "\t[e]ast   -> move east.\n";
-	std::cout << "\t[a]ttack -> attack enemies.\n\n";
-}
-
 void show_state() 
 {
 	Player player = get_player();
