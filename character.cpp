@@ -1,6 +1,7 @@
 #include "character.h"
 
 #include <cmath>
+#include <limits>
 
 Character::Character(
 	std::pair<int, int> xy, 
@@ -21,9 +22,8 @@ void Character::SetPosition(std::pair<int, int> xy)
 
 void Character::Attack(Character& enemy) const
 {
-	const float epsilon = 1e-4f;
 	float dist = Distance(enemy);
-	if (std::abs(dist - 1.0f) < epsilon)
+	if (std::abs(dist - 1.0f) < std::numeric_limits<float>::epsilon())
 	{
 		enemy.SetHealthPoints(
 			enemy.GetHealthPoints() - 

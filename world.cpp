@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <limits>
 
 World::World(const std::string& map, int length) : hero_({0, 0})
 {
@@ -90,7 +91,7 @@ void World::HeroAttack()
 	for (auto& enemy : enemies_)
 	{
 		float dist = enemy.Distance(hero_);
-		if (std::abs(dist - 1.0f) < 1e-4) 
+		if (std::abs(dist - 1.0f) < std::numeric_limits<float>::epsilon()) 
 		{
 			hero_.Attack(enemy);
 		}
@@ -136,7 +137,7 @@ void World::ShowEnemies() const
 	for (const auto& enemy : enemies_)
 	{
 		float dist = enemy.Distance(hero_);
-		if (std::abs(dist - 1.0f) < 1e-4f) 
+		if (std::abs(dist - 1.0f) < std::numeric_limits<float>::epsilon()) 
 		{
 			std::cout
 				<< "Enemy(" 
@@ -156,7 +157,7 @@ void World::EnemyAttack()
 	for (auto& enemy : enemies_)
 	{
 		float dist = enemy.Distance(hero_);
-		if (std::abs(dist - 1.0f) < 1e-4f)
+		if (std::abs(dist - 1.0f) < std::numeric_limits<float>::epsilon())
 		{
 			enemy.Attack(hero_);
 		}
